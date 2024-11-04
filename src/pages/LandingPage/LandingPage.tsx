@@ -40,7 +40,7 @@ export default function LandingPage() {
           </svg>
         </button>
       </div>
-      <div>Image</div>
+      <div></div>
     </div>
   );
 }

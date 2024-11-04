@@ -1,0 +1,29 @@
+.underlineHover {
+  position: relative;
+  display: inline-block;
+  color: #878f9a;
+  transition: color 0.3s ease; /* Smooth transition for text color */
+}
+
+/* Create the underline */
+.underlineHover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+/* Change the text color */
+.underlineHover:hover {
+  color: white;
+}
+
+/* Change the hover color */
+.underlineHover:hover::after {
+  width: 100%;
+  background-color: white;
+}

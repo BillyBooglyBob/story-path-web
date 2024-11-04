@@ -1,0 +1,37 @@
+.mouseHover {
+  color: white;
+  border-color: #878f9a; 
+  position: relative; 
+  overflow: hidden; 
+  background: transparent;
+}
+
+.mouseHover > p, .mouseHover > svg {
+  z-index: 100;
+}
+
+.mouseHover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 0;
+  transition: left 0.3s ease;
+}
+
+.mouseHover:hover::before {
+  left: 0;
+}
+
+.mouseHover:hover {
+  color: black; 
+  z-index:2
+}
+
+.mouseHover span {
+  position: relative;
+  z-index: 1;
+}

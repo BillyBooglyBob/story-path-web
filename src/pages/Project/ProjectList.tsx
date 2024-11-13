@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteProject, getProjects } from "../../lib/utils";
+import { deleteProject, getProjects } from "../../lib/api";
 import { Project } from "../../lib/types";
 import { useNavigate } from "react-router-dom";
 import AddItemButton from "../../components/ItemList/AddItemButton";
@@ -68,7 +68,7 @@ export default function ProjectList() {
 
   return (
     <div>
-      <ListHeader>Project List</ListHeader>
+      <ListHeader header="Project List"/>
       <ul>
         {data?.map((project) => (
           <ListItem key={project.id}>

@@ -1,5 +1,3 @@
-import React from "react";
-
 type ListItemSectionInfoProp = {
   title: string;
   value: string;

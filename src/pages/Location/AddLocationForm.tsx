@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { createLocation } from "../../lib/utils";
+import { createLocation } from "../../lib/api";
 import { useNavigate, useParams } from "react-router-dom";
 import LocationForm from "./LocationForm";
 import { ProjectLocation } from "../../lib/types";

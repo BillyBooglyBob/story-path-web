@@ -1,5 +1,5 @@
 import { Project } from "../../lib/types";
-import { getProject, updateProject } from "../../lib/utils";
+import { getProject, updateProject } from "../../lib/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import ProjectForm from "./ProjectForm";
@@ -19,7 +19,8 @@ export default function AddProjectForm() {
 
   // Mutation method for updating the project
   const mutation = useMutation({
-    mutationFn: (newProject: Project) => updateProject(Number(projectId), newProject),
+    mutationFn: (newProject: Project) =>
+      updateProject(Number(projectId), newProject),
     onSuccess: () => {
       console.log("Project created");
       navigate(`/project`);

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { Project } from "../../lib/types";
-import { createProject } from "../../lib/utils";
+import { createProject } from "../../lib/api";
 import { useNavigate } from "react-router-dom";
 import ProjectForm from "./ProjectForm";
 

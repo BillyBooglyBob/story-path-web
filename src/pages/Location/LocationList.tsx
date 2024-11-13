@@ -4,7 +4,7 @@ import {
   getLocations,
   getProject,
   updateLocation,
-} from "../../lib/utils";
+} from "../../lib/api";
 import { Project, ProjectLocation } from "../../lib/types";
 import { useNavigate, useParams } from "react-router-dom";
 import AddItemButton from "../../components/ItemList/AddItemButton";
@@ -20,6 +20,7 @@ import MoveItemDownButton from "../../components/ItemList/MoveItemDownButton";
 import PreviewButton from "../../components/Buttons/PreviewButton/PreviewButton";
 import QRCode from "react-qr-code";
 import { useState } from "react";
+import { locationCoordinateDecimalTrimming } from "../../lib/util";
 
 export default function LocationList() {
   const { projectId } = useParams();
@@ -219,94 +220,95 @@ export default function LocationList() {
 
   return (
     <div>
-      <ListHeader>
-      Location List: {project?.title}
-      <PreviewButton handlePreview={handlePreview} />
+      <ListHeader header="Location List:" title={project?.title ?? ""}>
+        <PreviewButton handlePreview={handlePreview} />
       </ListHeader>
 
       <ul>
-      {sortedData?.map((location) => (
-        <ListItem key={location.id}>
-        <ListItemTitle title={location.location_name} />
+        {sortedData?.map((location) => (
+          <ListItem key={location.id}>
+            <ListItemTitle title={location.location_name} />
 
-        <ListItemSection>
-          <ListItemSectionInfo
-          title="Location Trigger"
-          value={location.location_trigger}
-          />
-          <ListItemSectionInfo
-          title="Location Position"
-          value={location.location_position}
-          />
-        </ListItemSection>
+            <ListItemSection>
+              <ListItemSectionInfo
+                title="Location Trigger"
+                value={location.location_trigger}
+              />
+              <ListItemSectionInfo
+                title="Location Position"
+                value={locationCoordinateDecimalTrimming(
+                  location.location_position
+                )}
+              />
+            </ListItemSection>
 
-        <ListItemSection>
-          <ListItemSectionInfo
-          title="Score Points"
-          value={String(location.score_points)}
-          />
-          <ListItemSectionInfo
-          title="Clue"
-          value={location.clue ? location.clue : "None"}
-          />
-        </ListItemSection>
+            <ListItemSection>
+              <ListItemSectionInfo
+                title="Score Points"
+                value={String(location.score_points)}
+              />
+              <ListItemSectionInfo
+                title="Clue"
+                value={location.clue ? location.clue : "None"}
+              />
+            </ListItemSection>
 
-        <ListItemButtonContainer>
-          <ListItemButton
-          hoverBg="bg-yellow-800"
-          onClick={() => location.id && handlePrintQRCode(location.id)}
-          >
-          Print QR Code
-          </ListItemButton>
+            <ListItemButtonContainer>
+              <ListItemButton
+                hoverBg="bg-yellow-800"
+                onClick={() => location.id && handlePrintQRCode(location.id)}
+              >
+                Print QR Code
+              </ListItemButton>
 
-          <ListItemButton
-          hoverBg="bg-blue-800"
-          onClick={() => location.id && handleEdit(location.id)}
-          >
-          Edit
-          </ListItemButton>
+              <ListItemButton
+                hoverBg="bg-blue-800"
+                onClick={() => location.id && handleEdit(location.id)}
+              >
+                Edit
+              </ListItemButton>
 
-          <ListItemButton
-          hoverBg="bg-red-800"
-          onClick={() => location.id && handleDelete(location.id)}
-          >
-          Delete
-          </ListItemButton>
-        </ListItemButtonContainer>
-        <ListItemButtonContainer>
-          <MoveItemUpButton
-          handleClick={() =>
-            location.id && handleMoveLocationUp(location.id)
-          }
-          />
-          <MoveItemDownButton
-          handleClick={() =>
-            location.id && handleMoveLocationDown(location.id)
-          }
-          />
-        </ListItemButtonContainer>
-        </ListItem>
-      ))}
-      <AddItemButton handleAddItem={handleAddLocation} />
+              <ListItemButton
+                hoverBg="bg-red-800"
+                onClick={() => location.id && handleDelete(location.id)}
+              >
+                Delete
+              </ListItemButton>
+            </ListItemButtonContainer>
+            <ListItemButtonContainer>
+              <MoveItemUpButton
+                handleClick={() =>
+                  location.id && handleMoveLocationUp(location.id)
+                }
+              />
+              <MoveItemDownButton
+                handleClick={() =>
+                  location.id && handleMoveLocationDown(location.id)
+                }
+              />
+            </ListItemButtonContainer>
+          </ListItem>
+        ))}
+        <AddItemButton handleAddItem={handleAddLocation} />
       </ul>
       {qrCodeData && (
-      <div
-        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10"
-        onClick={() => setQrCodeData(null)}
-      >
         <div
-        className="bg-white p-4 rounded flex flex-col items-center"
-        onClick={(e) => e.stopPropagation()}
-        >
-        <QRCode value={qrCodeData} />
-        <button
-          className="text-black mt-2 w-full"
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10"
           onClick={() => setQrCodeData(null)}
         >
-          Close
-        </button>
+          <div
+            className="bg-white p-4 rounded flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <QRCode value={qrCodeData} />
+            <button
+              className="text-black mt-2 w-full"
+              onClick={() => setQrCodeData(null)}
+            >
+              Close
+            </button>
+          </div>
         </div>
-      </div>
       )}
     </div>
   );

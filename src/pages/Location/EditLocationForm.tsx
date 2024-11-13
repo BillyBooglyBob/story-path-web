@@ -1,5 +1,5 @@
 import { ProjectLocation } from "../../lib/types";
-import { getLocation, updateLocation } from "../../lib/utils";
+import { getLocation, updateLocation } from "../../lib/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import LocationForm from "./LocationForm";
@@ -16,7 +16,7 @@ export default function EditLocationForm() {
 
   // Extract location from the data array
   const location = data?.[0];
-  
+
   // Mutation method for updating the location
   const mutation = useMutation({
     mutationFn: (newLocation: ProjectLocation) =>

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getLocations, getProject } from "../lib/utils";
+import { getLocations, getProject } from "../lib/api";
 import { Project, ProjectLocation } from "../lib/types";
 import { HOMESCREEN_DISPLAY_OPTIONS, SCORING_OPTIONS } from "../lib/constants";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import PreviewDisplayContent from "../components/PreviewDisplay/PreviewDisplayCo
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import PreviewMapRefocus from "../components/PreviewDisplay/PreviewMapRefocus";
+import { locationCoordinateDecimalTrimming } from "../lib/util";
 
 type Stats = {
   score: number;
@@ -161,6 +162,7 @@ export default function Preview() {
               title="Instructions"
               value={project?.instructions ?? ""}
             />
+            {/* Display locations differently */}
             {project?.homescreen_display ===
             HOMESCREEN_DISPLAY_OPTIONS.initialClue ? (
               <div>
@@ -170,26 +172,31 @@ export default function Preview() {
                 />
                 <div>
                   <label htmlFor="selectLocation">Choose location</label>
-                  <select
-                    id="selectLocation"
-                    name="selectLocation"
-                    className="w-full p-2 bg-gray-700 border border-gray-600 rounded-md"
-                    onChange={(e) => {
-                      const selectedLocationId = Number(e.target.value);
-                      if (!isNaN(selectedLocationId)) {
-                        handleLocationChange(selectedLocationId);
-                      }
-                    }}
-                  >
-                    <option value="" disabled selected>
-                      Select a location
-                    </option>
-                    {locations?.map((location) => (
-                      <option key={location.id} value={location.id}>
-                        {location.location_name}
+                  <div className="relative">
+                    <select
+                      id="selectLocation"
+                      name="selectLocation"
+                      className="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md appearance-none focus:outline-none"
+                      onChange={(e) => {
+                        const selectedLocationId = Number(e.target.value);
+                        if (!isNaN(selectedLocationId)) {
+                          handleLocationChange(selectedLocationId);
+                        }
+                      }}
+                    >
+                      <option value="" disabled selected>
+                        Select a location
                       </option>
-                    ))}
-                  </select>
+                      {locations?.map((location) => (
+                        <option key={location.id} value={location.id}>
+                          {location.location_name}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                      ▼
+                    </span>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -231,7 +238,9 @@ export default function Preview() {
           />
           <PreviewDescriptionItem
             title="Position"
-            value={stats.currentLocation?.location_position ?? ""}
+            value={locationCoordinateDecimalTrimming(
+              stats.currentLocation?.location_position ?? ""
+            )}
           />
           <PreviewDescriptionItem title="Content" />
           <PreviewDisplayContent

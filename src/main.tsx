@@ -13,6 +13,7 @@ import CreateProjectForm from "./pages/Project/AddProjectForm.tsx";
 import UpdateProjectForm from "./pages/Project/EditProjectForm.tsx";
 import AddLocationForm from "./pages/Location/AddLocationForm.tsx";
 import EditLocationForm from "./pages/Location/EditLocationForm.tsx";
+import { AnimatePresence } from "framer-motion";
 
 const queryClient = new QueryClient();
 
@@ -61,7 +62,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AnimatePresence>
+        <RouterProvider router={router} />
+      </AnimatePresence>
     </QueryClientProvider>
   </StrictMode>
 );

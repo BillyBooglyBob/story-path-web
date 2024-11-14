@@ -1,5 +1,6 @@
 export const locationCoordinateDecimalTrimming = (coordinate: String) => {
-  if (coordinate == "") return "";
+  if (coordinate == "" || coordinate == null || coordinate == undefined)
+    return "";
 
   const coords = coordinate.split(",");
 
@@ -7,6 +8,7 @@ export const locationCoordinateDecimalTrimming = (coordinate: String) => {
     .map((coord) => {
       const coordArray = coord.split(".");
 
+      // For coordinates with no decimals
       return coordArray[0] + "." + coordArray[1].slice(0, 6);
     })
     .join(", ");

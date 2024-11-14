@@ -236,9 +236,10 @@ export default function LocationList() {
               />
               <ListItemSectionInfo
                 title="Location Position"
-                value={locationCoordinateDecimalTrimming(
-                  location.location_position
-                )}
+                // value={locationCoordinateDecimalTrimming(
+                //   location.location_position ?? ""
+                // )}
+                value={location.location_position}
               />
             </ListItemSection>
 

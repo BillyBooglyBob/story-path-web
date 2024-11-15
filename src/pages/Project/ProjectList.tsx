@@ -10,6 +10,11 @@ import ListItemSection from "../../components/ItemList/ListItemSection";
 import ListItemSectionInfo from "../../components/ItemList/ListItemSectionInfo";
 import ListItemButton from "../../components/ItemList/ListItemButton";
 import ListItemButtonContainer from "../../components/ItemList/ListItemButtonContainer";
+import { div } from "framer-motion/client";
+import ListItemTitleLoading from "../../components/ItemListLoading/ListItemTitleLoading";
+import ListItemSectionInfoLoading from "../../components/ItemListLoading/ListItemSectionInfoLoading";
+import ListItemLoading from "../../components/ItemListLoading/ListItemLoading";
+import LoadingList from "../../components/ItemListLoading/LoadingList";
 
 export default function ProjectList() {
   const navigate = useNavigate();
@@ -62,13 +67,19 @@ export default function ProjectList() {
   };
 
   // Handle error and loading
-  if (status === "pending") return <h1 className="text-white">Loading...</h1>;
   if (status === "error")
     return <h1 className="text-white">Error: {error.message}</h1>;
+  if (status === "pending")
+    return (
+      <div>
+        <ListHeader header="Project List" />
+        <LoadingList />;
+      </div>
+    );
 
   return (
     <div>
-      <ListHeader header="Project List"/>
+      <ListHeader header="Project List" />
       <ul>
         {data?.map((project) => (
           <ListItem key={project.id}>

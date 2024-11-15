@@ -21,6 +21,8 @@ import PreviewButton from "../../components/Buttons/PreviewButton/PreviewButton"
 import QRCode from "react-qr-code";
 import { useState } from "react";
 import { locationCoordinateDecimalTrimming } from "../../lib/util";
+import LoadingList from "../../components/ItemListLoading/LoadingList";
+import ListHeaderLoading from "../../components/ItemListLoading/ListHeaderLoading";
 
 export default function LocationList() {
   const { projectId } = useParams();
@@ -212,7 +214,12 @@ export default function LocationList() {
 
   // Handle error and loading
   if (locationStatus === "pending" || projectStatus === "pending")
-    return <h1 className="text-white">Loading...</h1>;
+    return (
+      <div>
+        <ListHeaderLoading header="Location List" title={true} />
+        <LoadingList />;
+      </div>
+    );
   if (locationStatus === "error")
     return <h1 className="text-white">Error: {locationError.message}</h1>;
   if (projectStatus === "error")

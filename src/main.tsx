@@ -14,6 +14,7 @@ import UpdateProjectForm from "./pages/Project/EditProjectForm.tsx";
 import AddLocationForm from "./pages/Location/AddLocationForm.tsx";
 import EditLocationForm from "./pages/Location/EditLocationForm.tsx";
 import { AnimatePresence } from "framer-motion";
+import AboutPage from "./pages/AboutPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
       },
       {
         path: "/project",

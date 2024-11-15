@@ -3,4 +3,18 @@
   margin: 0 auto;
 }
 
+html::-webkit-scrollbar {
+  width: 1vw;
+}
 
+html::-webkit-scrollbar-thumb {
+  background-color: #7775;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: rgb(29 34 40);
+}

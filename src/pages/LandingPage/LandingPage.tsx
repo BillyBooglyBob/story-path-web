@@ -86,13 +86,11 @@ export default function LandingPage() {
               "url('https://assets.website-files.com/6193c9dbb809764879877eec/619b9002610d894498f32418_media_elem.png')",
             backgroundPosition: "0 50%",
             width: "150px",
-            transformOrigin: "left", // Make it grow outward from the left side
-            // clip-path: inset(0 50% 0 0)
-            // clipPath: "inset(0 0 50% 0)"
+            transformOrigin: "left",
           }}
-          initial={{ clipPath: "inset(0 0 70% 0)" }} // Start with only the left half visible
+          initial={{ clipPath: "inset(0 0 70% 0)" }} // Start with only the top half visible
           animate={{ clipPath: "inset(0 0 0% 0)" }} // Expand to reveal the full width
-          transition={{ duration: 0.8 }} // Smooth transition
+          transition={{ duration: 0.8 }}
         ></motion.div>
         {/* yellow rectangle */}
         <motion.div

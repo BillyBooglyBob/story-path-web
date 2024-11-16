@@ -3,6 +3,7 @@ type TextInputProps = {
   label: string;
   name: string;
   value: string;
+  placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -11,11 +12,11 @@ export function TextInput({
   label,
   name,
   value,
+  placeholder,
   onChange,
 }: TextInputProps) {
-  console.log("TextInput", value);
   return (
-    <div className="mb-4">
+    <div className="mb-4 w-full">
       <label htmlFor={name} className="block text-lg mb-1">
         {label}
       </label>
@@ -25,6 +26,7 @@ export function TextInput({
         name={name}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
         className="w-full p-2 bg-gray-700 border border-gray-600 rounded-md"
       />
     </div>

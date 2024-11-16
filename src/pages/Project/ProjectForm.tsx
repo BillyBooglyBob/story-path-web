@@ -81,24 +81,28 @@ export default function ProjectForm({
         label="Title"
         name="title"
         value={formData.title}
+        placeholder={"e.g. Brisbane tour"}
         onChange={handleChange}
       />
       <TextArea
         label="Description"
         name="description"
         value={formData.description}
+        placeholder="e.g. A tresure hunt around Brisbane"
         onChange={handleChange}
       />
       <TextArea
         label="Instructions"
         name="instructions"
         value={formData.instructions}
+        placeholder="e.g. Go around the city and scan QR codes"
         onChange={handleChange}
       />
       <TextArea
         label="Initial Clue"
         name="initial_clue"
         value={formData.initial_clue ? formData.initial_clue : ""}
+        placeholder="e.g. Go to the city hall"
         onChange={handleChange}
       />
       <SelectInput

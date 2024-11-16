@@ -1,6 +1,6 @@
 type ListItemSectionInfoProp = {
-  title: string;
-  value: string;
+  title: String;
+  value: String;
 };
 
 export default function ListItemSectionInfo({

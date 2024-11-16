@@ -10,10 +10,6 @@ import ListItemSection from "../../components/ItemList/ListItemSection";
 import ListItemSectionInfo from "../../components/ItemList/ListItemSectionInfo";
 import ListItemButton from "../../components/ItemList/ListItemButton";
 import ListItemButtonContainer from "../../components/ItemList/ListItemButtonContainer";
-import { div } from "framer-motion/client";
-import ListItemTitleLoading from "../../components/ItemListLoading/ListItemTitleLoading";
-import ListItemSectionInfoLoading from "../../components/ItemListLoading/ListItemSectionInfoLoading";
-import ListItemLoading from "../../components/ItemListLoading/ListItemLoading";
 import LoadingList from "../../components/ItemListLoading/LoadingList";
 
 export default function ProjectList() {

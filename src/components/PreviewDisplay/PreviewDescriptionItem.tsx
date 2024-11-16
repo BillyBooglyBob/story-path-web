@@ -2,8 +2,8 @@ export default function PreviewDescriptionItem({
   title,
   value,
 }: {
-  title: string;
-  value?: string;
+  title: String;
+  value?: String;
 }) {
   return (
     <div className="text-white pb-4">

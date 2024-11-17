@@ -1,10 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  deleteLocation,
-  getLocations,
-  getProject,
-  updateLocation,
-} from "../../lib/api";
+import { deleteLocation, getLocations, getProject } from "../../lib/api";
 import { Project, ProjectLocation } from "../../lib/types";
 import { useNavigate, useParams } from "react-router-dom";
 import AddItemButton from "../../components/ItemList/AddItemButton";
@@ -15,8 +10,6 @@ import ListItemSection from "../../components/ItemList/ListItemSection";
 import ListItemSectionInfo from "../../components/ItemList/ListItemSectionInfo";
 import ListItemButton from "../../components/ItemList/ListItemButton";
 import ListItemButtonContainer from "../../components/ItemList/ListItemButtonContainer";
-import MoveItemUpButton from "../../components/ItemList/MoveItemUpButton";
-import MoveItemDownButton from "../../components/ItemList/MoveItemDownButton";
 import PreviewButton from "../../components/Buttons/PreviewButton/PreviewButton";
 import QRCode from "react-qr-code";
 import { useState } from "react";
@@ -115,98 +108,6 @@ export default function LocationList() {
     navigate(`/project/${projectId}/location/add/${maxOrder}`);
   };
 
-  // Handle updating location's order
-  const updateMutation = useMutation({
-    mutationFn: ({
-      locationId,
-      newLocation,
-    }: {
-      locationId: number;
-      newLocation: ProjectLocation;
-    }) => updateLocation(locationId, newLocation),
-    onSuccess: () => {
-      console.log("Location updated");
-    },
-    onError: (error) => {
-      console.log("Error updating location", error);
-    },
-  });
-
-  // Swaps location order of the two locations
-  const swapLocationOrder = (
-    currentLocation: ProjectLocation,
-    previousLocation: ProjectLocation
-  ) => {
-    const tempOrder = currentLocation.location_order;
-    currentLocation.location_order = previousLocation.location_order;
-    previousLocation.location_order = tempOrder;
-
-    if (currentLocation.id !== undefined) {
-      updateMutation.mutate({
-        locationId: currentLocation.id,
-        newLocation: currentLocation,
-      });
-    }
-
-    if (previousLocation.id !== undefined) {
-      updateMutation.mutate({
-        locationId: previousLocation.id,
-        newLocation: previousLocation,
-      });
-    }
-  };
-
-  // Change the order of the locations
-  const handleMoveLocationUp = (locationId: number) => {
-    const currentLocation = locationData?.find(
-      (location) => location.id === locationId
-    );
-    const index = locationData?.findIndex(
-      (location) => location.id === locationId
-    );
-
-    // If index is 0, cannot move location up higher
-    if (index === 0) return;
-
-    // Get previous location
-    let previousLocation: ProjectLocation | undefined;
-    if (index !== undefined && index > 0) {
-      previousLocation = locationData?.[index - 1];
-    }
-
-    // Update the location_order of the two locations
-    if (currentLocation && previousLocation) {
-      swapLocationOrder(currentLocation, previousLocation);
-    }
-  };
-
-  const handleMoveLocationDown = (locationId: number) => {
-    const currentLocation = locationData?.find(
-      (location) => location.id === locationId
-    );
-    const index = locationData?.findIndex(
-      (location) => location.id === locationId
-    );
-
-    // if index is the last index, cannot move location down
-    if (locationData && index === locationData.length - 1) return;
-
-    // Get next location
-    let nextLocation: ProjectLocation | undefined;
-    if (
-      locationData &&
-      index !== undefined &&
-      index < locationData.length - 1
-    ) {
-      nextLocation = locationData?.[index + 1];
-    }
-
-    // Update the location_order of the two locations
-    if (currentLocation && nextLocation) {
-      swapLocationOrder(currentLocation, nextLocation);
-    }
-  };
-
   // Handle preview button
   const handlePreview = () => {
     navigate(`/project/${projectId}/preview`);
@@ -281,18 +182,6 @@ export default function LocationList() {
               >
                 Delete
               </ListItemButton>
-            </ListItemButtonContainer>
-            <ListItemButtonContainer>
-              <MoveItemUpButton
-                handleClick={() =>
-                  location.id && handleMoveLocationUp(location.id)
-                }
-              />
-              <MoveItemDownButton
-                handleClick={() =>
-                  location.id && handleMoveLocationDown(location.id)
-                }
-              />
             </ListItemButtonContainer>
           </ListItem>
         ))}

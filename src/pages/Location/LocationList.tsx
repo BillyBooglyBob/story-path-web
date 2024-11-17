@@ -246,7 +246,6 @@ export default function LocationList() {
                 value={locationCoordinateDecimalTrimming(
                   location.location_position ?? ""
                 )}
-                // value={location.location_position}
               />
             </ListItemSection>
 
@@ -256,7 +255,7 @@ export default function LocationList() {
                 value={String(location.score_points)}
               />
               <ListItemSectionInfo
-                title="Clue"
+                title="Clue to next location"
                 value={location.clue ? location.clue : "None"}
               />
             </ListItemSection>

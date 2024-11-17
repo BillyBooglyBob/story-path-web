@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { TextInput } from "../../components/FormElements/TextInput";
 import { TextArea } from "../../components/FormElements/TextArea";
-import { SelectInput } from "../../components/FormElements/SelectInput";
-import { LOCATION_TRIGGER_OPTIONS } from "../../lib/constants";
 import { UseMutationResult } from "@tanstack/react-query";
 import { ProjectLocation } from "../../lib/types";
 import Form from "../../components/FormElements/Form";
@@ -107,28 +105,8 @@ export default function LocationForm({
         onChange={handleChange}
       />
 
-      <SelectInput
-        label="Location_trigger"
-        name="location_trigger"
-        value={formData.location_trigger}
-        options={[
-          {
-            value: LOCATION_TRIGGER_OPTIONS.locationEntry,
-            label: LOCATION_TRIGGER_OPTIONS.locationEntry,
-          },
-          {
-            value: LOCATION_TRIGGER_OPTIONS.QRCode,
-            label: LOCATION_TRIGGER_OPTIONS.QRCode,
-          },
-          {
-            value: LOCATION_TRIGGER_OPTIONS.LocationEntryAndQRCode,
-            label: LOCATION_TRIGGER_OPTIONS.LocationEntryAndQRCode,
-          },
-        ]}
-        onChange={handleChange}
-      />
       <TextArea
-        label="Clue"
+        label="Clue to next location"
         name="clue"
         value={formData.clue ? formData.clue : ""}
         placeholder="e.g. the next location is close to the lake"

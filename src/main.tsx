@@ -17,6 +17,17 @@ import { AnimatePresence } from "framer-motion";
 import AboutPage from "./pages/AboutPage.tsx";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import L from 'leaflet';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+L.Marker.prototype.options.icon = L.icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41], // Default size for Leaflet icons
+  iconAnchor: [12, 41], // Anchor for the icon base
+});
+
 
 const queryClient = new QueryClient();
 

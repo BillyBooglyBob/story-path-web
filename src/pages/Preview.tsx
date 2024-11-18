@@ -10,6 +10,8 @@ import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import PreviewMapRefocus from "../components/PreviewDisplay/PreviewMapRefocus";
 import { locationCoordinateDecimalTrimming } from "../lib/util";
+import "leaflet-defaulticon-compatibility";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 
 type Stats = {
   score: number;

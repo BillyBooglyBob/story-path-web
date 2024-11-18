@@ -15,6 +15,8 @@ import AddLocationForm from "./pages/Location/AddLocationForm.tsx";
 import EditLocationForm from "./pages/Location/EditLocationForm.tsx";
 import { AnimatePresence } from "framer-motion";
 import AboutPage from "./pages/AboutPage.tsx";
+import "leaflet-defaulticon-compatibility";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 
 const queryClient = new QueryClient();
 

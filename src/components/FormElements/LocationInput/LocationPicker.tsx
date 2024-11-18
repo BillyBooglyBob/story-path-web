@@ -3,6 +3,9 @@
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { coordinateToNumArray } from "../../../lib/util";
+import 'leaflet-defaulticon-compatibility';
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+
 
 type LocationPickerType = {
   handleClose: () => void;

@@ -139,10 +139,6 @@ export default function LocationList() {
 
             <ListItemSection>
               <ListItemSectionInfo
-                title="Location Trigger"
-                value={location.location_trigger}
-              />
-              <ListItemSectionInfo
                 title="Location Position"
                 value={locationCoordinateDecimalTrimming(
                   location.location_position ?? ""

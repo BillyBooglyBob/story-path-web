@@ -20,6 +20,5 @@ Users can choose from various location-based experiences (projects) created on t
 
 ## 🛠 Tech Stack  
 - **Frontend (Web App):** React  
-- **Mobile (Player):** React Native  
-- **Backend:** Node.js (for backend logic, if applicable)  
-- **QR Code Scanning:** Integrated QR scanning functionality  
+- **Mobile (Player):** React Native, Expo
+- **Tools**: TypeScript, Tailwind CSS
